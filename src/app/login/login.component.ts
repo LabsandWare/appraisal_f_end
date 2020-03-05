@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+import { AuthService } from '../services/auth.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +11,35 @@ import { FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  user = new User;
+
+  constructor( private auth: AuthService, 
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
-  login(input: any) {
+  login() {
+    this.auth.login(this.user)
+      .subscribe((res: any) => {
+        if (res.status == false) {
 
+          this.toastr.error(
+            'Please enter valid credentials',
+            'Login error',
+            {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            }
+          );
+        } else {
+          localStorage.setItem('access_token', res.token);
+          this.toastr.success('You are now logged in', 'Welcome!', {
+            timeOut: 5000,
+            positionClass: 'toast-top-center'
+          });
+        }
+      });
   }
 
 }

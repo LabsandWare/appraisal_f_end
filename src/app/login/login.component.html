@@ -1,74 +1,82 @@
 <div class="container-fluid">
-  <div class="row">
-      <div class="col-lg-8 pt-5">
-          <div class="row">
-              <div class="col-12 mb-5">
-                  <div class="d-flex">
-                      <div class="pt-lg-2 pt-1 px-lg-3 px-2">
-                          <a href="#">
-                              <img src="assets/img/back arrow.svg" alt="">
-                          </a>
-                      </div>
-                      <div>
-                          <p class="ff-p fs-32 fw-6 get m-0">
-                              Welcome back
-                          </p>
-                          <small class="fs-14 fc-lb ff-p">
-                              Please provide your login credentials
-                          </small>
-                      </div>
-                  </div>
-              </div> 
-              <div class="col-12 px-lg-5 px-3">
-                  <form #loginForm="ngForm" (submit)="login(loginForm)" class="row px-lg-3" ngNativeValidate>
-                      <div class="col-lg-12 mb-3">
-                          <div class="floating-label">
-                              <input class="floating-input" type="email" name="email" ngModel placeholder=" ">
-                              <label>Email</label>
-                          </div>
+    <div class="row">
+        <div class="col-lg-8 pt-5">
+            <div class="row">
+                <div class="col-12 mb-5">
+                    <div class="d-flex">
+                        <div class="pt-lg-2 pt-1 px-lg-3 px-2">
+                            <a href="#">
+                                <img src="assets/img/back arrow.svg" alt="">
+                            </a>
+                        </div>
+                        <div>
+                            <p class="ff-p fs-32 fw-6 get m-0">
+                                Welcome back
+                            </p>
+                            <small class="fs-14 fc-lb ff-p">
+                                Please provide your login credentials
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-lg-5 px-3">
+                    <form #loginForm="ngForm" (ngSubmit)="login()" class="row px-lg-3" ngNativeValidate>
+                        <div class="col-lg-12 mb-3">
+                            <div class="floating-label">
+                                <input class="floating-input" type="text" name="email" [(ngModel)]="user.email"
+                                    placeholder=" ">
+                                <label>Email</label>
+                            </div>
 
-                      </div>
-                      <div class="col-lg-12 mb-1">
-                          <div class="floating-label">
-                              <input class="floating-input" type="password" ngModel name="password" placeholder=" ">
-                              <label>Password</label>
-                          </div>
+                        </div>
+                        <div class="col-lg-12 mb-1">
+                            <div class="floating-label">
+                                <input class="floating-input" type="password" [(ngModel)]="user.password"
+                                    name="password" placeholder=" ">
+                                <label>Password</label>
+                            </div>
 
-                      </div>
-                      <div class="col-12 mb-5">
-                          <p class="text-right">
+                        </div>
+                        <div class="col-12 mb-5">
+                            <!-- <p class="text-right">
                               <a href="#" class="fc-lb ff-p fs-14">
                                   forgot password?
                               </a>
-                          </p>
-                      </div>
-                      
-                      <div class="col-12 mb-5">
-                          <button class="btn btn-blue w-100">
-                              LOGIN
-                          </button>
-                      </div>
+                          </p> -->
+                        </div>
 
-                  </form>
-              </div>
-          </div>
-      </div>
-      <div class="col-lg-4 px-lg-0">
-          <div class="move-container">
-              <div class="d-flex justify-content-around">
-                  <div class="pt-4">
-                      <a [routerLink]="['/bookademo']" class="ff-p fs-16 fc-w">Book a demo</a>
-                  </div>
-                  <button class="btn btn-white px-5 mt-3">Login</button>
-              </div>
-              <div class="get-text px-5">
-                  <p class="fc-w fs-32 px-3">
-                      <b>
-                          Move beyond training and design truly impactful blended learning solutions
-                      </b>
-                  </p>
-              </div>
-          </div>
-      </div>
-  </div>
+                        <div class="col-6 mb-5">
+                            <button routerLink="/register" routerLinkActive="active" class="btn btn-blue w-100">
+                                CANCEL
+                            </button>
+                        </div>
+
+                        <div class="col-6 mb-5">
+                            <button class="btn btn-blue w-100">
+                                LOGIN
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 px-lg-0">
+            <div class="move-container">
+                <div class="d-flex justify-content-around">
+                    <div class="pt-4">
+                        <!-- <a [routerLink]="['/bookademo']" class="ff-p fs-16 fc-w">Book a demo</a> -->
+                    </div>
+                    <button class="btn btn-white px-5 mt-3">Login</button>
+                </div>
+                <div class="get-text px-5">
+                    <p class="fc-w fs-32 px-3">
+                        <b>
+                            Move beyond training and design truly impactful blended learning solutions
+                        </b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
