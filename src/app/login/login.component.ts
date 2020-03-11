@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';                                                                                                                                                                                                                                                                                     
 
 import { AuthService } from '../services/auth.service';
 import { User } from '../model/user.model';
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   user = new User;
 
   constructor( private auth: AuthService, 
+    private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -22,8 +24,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login(this.user)
       .subscribe((res: any) => {
-        if (res.status == false) {
-
+        if (res.status === false) {
           this.toastr.error(
             'Please enter valid credentials',
             'Login error',
@@ -33,11 +34,12 @@ export class LoginComponent implements OnInit {
             }
           );
         } else {
-          localStorage.setItem('access_token', res.token);
+          localStorage.setItem('access_token', res.apikey);
           this.toastr.success('You are now logged in', 'Welcome!', {
             timeOut: 5000,
             positionClass: 'toast-top-center'
           });
+          this.router.navigate(['/']);
         }
       });
   }

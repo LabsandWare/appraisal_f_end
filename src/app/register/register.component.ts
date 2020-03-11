@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   user = new User;
 
   constructor(private auth: AuthService,
-    private toastr: ToastrService ) { }
+    private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -24,19 +24,39 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.auth.signup(this.user)
       .subscribe((res: any) => {
-        if (res.status == false) {
-          this.toastr.error('Please try again', 'Sign up error', {
-            timeOut: 5000,
-            positionClass: 'toast-top-center'
-          });
-        } else {
-          this.toastr.success(
-            'Login to continue.',
-            'Success, You have signed up.',
-            {
+        
+        console.log(res);
+
+        let unknown = Object.keys(res.message)[0];
+
+        switch (res.status) {
+
+          case false:
+            this.toastr.error(res.message[unknown], 'Sign up Error', {
               timeOut: 5000,
               positionClass: 'toast-top-center'
             });
+            break;
+
+          case 'Error':
+            this.toastr.error(res.message[unknown], 'Sign up Error', {
+              timeOut: 5000,
+              positionClass: 'toast-top-center'
+            });
+            break;
+
+          case 'Success':
+            this.toastr.success(
+              'Login to continue.',
+              'Success, You have signed up.',
+              {
+                timeOut: 5000,
+                positionClass: 'toast-top-center'
+              });
+              break;
+          
+          default:
+            break;
         }
       })
   }

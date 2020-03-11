@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }   from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app-routing';
@@ -19,6 +22,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 import { environment } from '../environments/environment';
+import { AppraisalComponent } from './appraisal/appraisal.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -29,10 +33,12 @@ export function tokenGetter() {
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AppraisalComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     FormsModule,
     FooterModule,
@@ -43,6 +49,7 @@ export function tokenGetter() {
         tokenGetter: tokenGetter
       }
     }),
+    MatDialogModule,
     NavbarModule,
     ToastrModule.forRoot(),
     SidebarModule

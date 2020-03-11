@@ -3,7 +3,6 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
-import { AuthHelper } from '../helpers/auth.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,8 @@ import { AuthHelper } from '../helpers/auth.helper';
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, 
-    private router: Router, private authHelper: AuthHelper) {}
+    private router: Router
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authHelper.isAuthenticated()) { return true; }
+    if (localStorage.getItem('access_token') !== null) { return true; }
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
